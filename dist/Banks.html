@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Management System - Banks</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col">
+        <!-- Mobile Navbar Toggle -->
+        <div class="md:hidden bg-gray-900 text-white p-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-university text-blue-400 text-xl mr-2"></i>
+                <span class="text-white font-bold text-xl">BankAdmin</span>
+            </div>
+            <button id="mobile-menu-button" class="text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="fixed flex flex-col top-0 left-0 w-64 bg-gray-900 h-full shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-30">
+            <div class="flex items-center justify-center h-14 border-b border-gray-800">
+                <div class="flex items-center">
+                    <i class="fas fa-university text-blue-400 text-xl mr-2"></i>
+                    <span class="text-white font-bold text-xl">BankAdmin</span>
+                </div>
+            </div>
+            <div class="overflow-y-auto overflow-x-hidden flex-grow">
+                <ul class="flex flex-col py-4 space-y-1">
+                    <li class="px-5">
+                        <div class="flex flex-row items-center h-8">
+                            <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Main</div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="index.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-tachometer-alt text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="banks.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-blue-500 bg-gray-700 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-university text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Banks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="branches.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-building text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Branches</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="employees.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-users text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Employees</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="customers.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-user-friends text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Customers</span>
+                        </a>                        
+                    </li>
+                    <li>
+                        <a href="accounts.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-wallet text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Accounts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="transactions.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-exchange-alt text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="loans.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-hand-holding-usd text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Loans</span>
+                        </a>
+                    </li>
+                    <li class="px-5">
+                        <div class="flex flex-row items-center h-8">
+                            <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Settings</div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="reports.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-chart-line text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="users.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-user-shield text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="settings.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-cog text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="md:ml-64 flex flex-col flex-1">
+            <!-- Top Bar -->
+            <div class="bg-white shadow-md py-3 px-4 md:px-6 flex justify-between items-center">
+                <h1 class="text-xl md:text-2xl font-semibold text-gray-800">Banks</h1>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500"></span>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center">
+                            <span class="text-white font-semibold text-sm">AD</span>
+                        </div>
+                        <span class="text-gray-700 font-medium hidden sm:inline">Admin</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banks Content -->
+            <div class="p-4 md:p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800">Banks Management</h2>
+                    <button id="add-bank-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center w-full sm:w-auto justify-center">
+                        <i class="fas fa-plus mr-2"></i> Add New Bank
+                    </button>
+                </div>
+
+                <!-- Search and Filter -->
+                <div class="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Search Banks</label>
+                            <div class="relative">
+                                <input type="text" id="bank-search" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search by name...">
+                                <div class="absolute left-3 top-2.5 text-gray-400">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Filter by Type</label>
+                            <select id="bank-type-filter" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">All Types</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="investment">Investment</option>
+                                <option value="retail">Retail</option>
+                                <option value="cooperative">Cooperative</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                            <select id="bank-sort" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="name">Bank Name</option>
+                                <option value="branches">Branch Count</option>
+                                <option value="customers">Customer Count</option>
+                                <option value="assets">Total Assets</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banks Table -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bank Name</th>
+                                    <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">Type</th>
+                                    <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Headquarters</th>
+                                    <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Branches</th>
+                                    <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-800">SB</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">State Bank of India</div>
+                                                <div class="text-sm text-gray-500 sm:hidden">Commercial</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                                        <div class="text-sm text-gray-900">Commercial</div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap hidden md:table-cell">
+                                        <div class="text-sm text-gray-900">Mumbai, Maharashtra</div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden lg:table-cell">45</td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900"><i class="fas fa-eye"></i></button>
+                                            <button class="text-indigo-600 hover:text-indigo-900"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-800">HD</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">HDFC Bank</div>
+                                                <div class="text-sm text-gray-500 sm:hidden">Commercial</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                                        <div class="text-sm text-gray-900">Commercial</div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap hidden md:table-cell">
+                                        <div class="text-sm text-gray-900">Mumbai, Maharashtra</div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden lg:table-cell">32</td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900"><i class="fas fa-eye"></i></button>
+                                            <button class="text-indigo-600 hover:text-indigo-900"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-800">IC</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">ICICI Bank</div>
+                                                <div class="text-sm text-gray-500 sm:hidden">Commercial</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                                        <div class="text-sm text-gray-900">Commercial</div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap hidden md:table-cell">
+                                        <div class="text-sm text-gray-900">Mumbai, Maharashtra</div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden lg:table-cell">28</td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900"><i class="fas fa-eye"></i></button>
+                                            <button class="text-indigo-600 hover:text-indigo-900"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-800">AX</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">Axis Bank</div>
+                                                <div class="text-sm text-gray-500 sm:hidden">Commercial</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                                        <div class="text-sm text-gray-900">Commercial</div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap hidden md:table-cell">
+                                        <div class="text-sm text-gray-900">Mumbai, Maharashtra</div>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden lg:table-cell">19</td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                    </td>
+                                    <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900"><i class="fas fa-eye"></i></button>
+                                            <button class="text-indigo-600 hover:text-indigo-900"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="bg-white px-4 md:px-6 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                        <div class="flex-1 flex justify-between sm:hidden">
+                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Previous</a>
+                            <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Next</a>
+                        </div>
+                        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-gray-700">
+                                    Showing <span class="font-medium">1</span> to <span class="font-medium">4</span> of <span class="font-medium">8</span> results
+                                </p>
+                            </div>
+                            <div>
+                                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <span class="sr-only">Previous</span>
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-blue-50 text-sm font-medium text-blue-600 hover:bg-blue-100">1</a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">2</a>
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <span class="sr-only">Next</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        });
+    </script>
+</body>
+</html>

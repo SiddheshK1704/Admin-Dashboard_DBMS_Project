@@ -1,0 +1,11 @@
+# Ignore node modules (installed dependencies)
+node_modules/
+
+# Ignore Tailwind’s generated CSS output
+src/output.css
+
+# Ignore dependency lock file (optional)
+package-lock.json
+
+# Ignore build files if they are auto-generated (optional)
+
