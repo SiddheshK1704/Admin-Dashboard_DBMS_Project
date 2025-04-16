@@ -55,32 +55,6 @@ DBMS-PROJECT/
 
 ---
 
-## 🚀 Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/your-username/dbms-bankadmin-dashboard.git
-cd dbms-bankadmin-dashboard
-```
-
-### 2. Install Dependencies
-
-```bash
-npm install
-```
-
-### 3. Build Tailwind CSS
-
-```bash
-npx tailwindcss -i ./src/input.css -o ./dist/style.css --watch
-```
-
-### 4. Open the App
-
-Just open `dist/index.html` in your browser.
-
----
 
 ## 📌 Notes
 
