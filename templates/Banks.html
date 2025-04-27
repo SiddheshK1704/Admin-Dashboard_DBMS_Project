@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Management System - Banks</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Add Tailwind CSS from CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
@@ -55,7 +55,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="employees.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                        <a href="{{ url_for('branches') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-code-branch text-blue-400"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate font-medium">Branches</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('employees') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <i class="fas fa-users text-blue-400"></i>
                             </span>
@@ -63,7 +71,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="customers.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                        <a href="{{ url_for('customers') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <i class="fas fa-user-friends text-blue-400"></i>
                             </span>
@@ -71,7 +79,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="transactions.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                        <a href="{{ url_for('transactions') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <i class="fas fa-exchange-alt text-blue-400"></i>
                             </span>
@@ -79,7 +87,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="loans.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                        <a href="{{ url_for('loans') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <i class="fas fa-hand-holding-usd text-blue-400"></i>
                             </span>
@@ -87,7 +95,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="accounts.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                        <a href="{{ url_for('accounts') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <i class="fas fa-wallet text-blue-400"></i>
                             </span>
