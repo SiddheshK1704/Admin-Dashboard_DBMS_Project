@@ -14,23 +14,24 @@ A responsive and modern Bank Administration Dashboard created as a DBMS project.
 ## 📁 Project Structure
 
 ```
-DBMS-PROJECT/
-├── dist/
-│   ├── Accounts.html
-│   ├── Banks.html
-│   ├── Branches.html
-│   ├── Customers.html
-│   ├── Employees.html
-│   ├── index.html
-│   ├── Loans.html
-│   ├── Transactions.html
-│   └── style.css
-├── src/
-│   └── input.css
-├── node_modules/
-├── package.json
-├── package-lock.json
-└── tailwind.config.js
+DBMS-Project/
+├── templates/
+│   ├── account_types.html
+│   ├── accounts.html
+│   ├── banks.html
+│   ├── branches.html
+│   ├── customers.html
+│   ├── dashboard.html
+│   ├── employees.html
+│   ├── loan_payments.html
+│   ├── loans.html
+│   ├── transactions.html
+├── venv/
+├── .gitignore
+├── app.py
+├── DashboardSS.png
+├── README.md
+
 ```
 
 ---
