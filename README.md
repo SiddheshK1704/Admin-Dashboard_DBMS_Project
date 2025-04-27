@@ -7,7 +7,7 @@ A responsive and modern Bank Administration Dashboard created as a DBMS project.
 
 ## 📸 Preview
 
-![Dashboard Screenshot](image.png)
+![Dashboard Screenshot](DashboardSS.png)
 
 ---
 
