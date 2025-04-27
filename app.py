@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
+app.secret_key = 'bank_management_secret_key'  # Required for flashing messages
 
-# to calculate informaation being showed on the main dashboard page
+# to calculate information being showed on the main dashboard page
 def calculate_dashboard_stats():
     # Get data from all tables
     banks = init_banks_db()
@@ -23,19 +24,23 @@ def calculate_dashboard_stats():
     }
     return stats
 
-# Initialize sample data for banks.html(replace with actual db tables data)
+# Initialize sample data for banks.html (replace with actual db tables data)
 def init_banks_db():
-    sample_banks = [
-        {'Bank_Code': 101, 'Bank_Name': 'State Bank of India', 'Address': '123 Main Street, Connaught Place', 'City': 'New Delhi'},
-        {'Bank_Code': 102, 'Bank_Name': 'HDFC Bank', 'Address': '456 Financial District, Bandra Kurla Complex', 'City': 'Mumbai'},
-        {'Bank_Code': 103, 'Bank_Name': 'ICICI Bank', 'Address': '789 Electronic City', 'City': 'Bangalore'},
-        {'Bank_Code': 104, 'Bank_Name': 'Axis Bank', 'Address': '321 Salt Lake', 'City': 'Kolkata'},
-        {'Bank_Code': 105, 'Bank_Name': 'Punjab National Bank', 'Address': '654 MG Road', 'City': 'Chennai'},
-        {'Bank_Code': 106, 'Bank_Name': 'Bank of Baroda', 'Address': '987 Cyber City', 'City': 'Gurugram'},
-        {'Bank_Code': 107, 'Bank_Name': 'Canara Bank', 'Address': '753 Civil Lines', 'City': 'Jaipur'},
-        {'Bank_Code': 108, 'Bank_Name': 'Union Bank of India', 'Address': '159 Boat Club Road', 'City': 'Pune'}
-    ]
-    return sample_banks
+    # This would typically be replaced with database operations
+    global banks_data
+    return banks_data
+
+# Storage for banks (simulating a database)
+banks_data = [
+    {'Bank_Code': 101, 'Bank_Name': 'State Bank of India', 'Address': '123 Main Street, Connaught Place', 'City': 'New Delhi'},
+    {'Bank_Code': 102, 'Bank_Name': 'HDFC Bank', 'Address': '456 Financial District, Bandra Kurla Complex', 'City': 'Mumbai'},
+    {'Bank_Code': 103, 'Bank_Name': 'ICICI Bank', 'Address': '789 Electronic City', 'City': 'Bangalore'},
+    {'Bank_Code': 104, 'Bank_Name': 'Axis Bank', 'Address': '321 Salt Lake', 'City': 'Kolkata'},
+    {'Bank_Code': 105, 'Bank_Name': 'Punjab National Bank', 'Address': '654 MG Road', 'City': 'Chennai'},
+    {'Bank_Code': 106, 'Bank_Name': 'Bank of Baroda', 'Address': '987 Cyber City', 'City': 'Gurugram'},
+    {'Bank_Code': 107, 'Bank_Name': 'Canara Bank', 'Address': '753 Civil Lines', 'City': 'Jaipur'},
+    {'Bank_Code': 108, 'Bank_Name': 'Union Bank of India', 'Address': '159 Boat Club Road', 'City': 'Pune'}
+]
 
 # Initialize sample data for employees.html (replace with actual db tables data)
 def init_employee_db():
@@ -160,7 +165,6 @@ def init_loan_payments_db():
 
 
 @app.route('/')
-
 @app.route('/dashboard')
 def dashboard():
     stats = calculate_dashboard_stats()
@@ -169,6 +173,62 @@ def dashboard():
 @app.route('/banks')
 def banks():
     return render_template('banks.html', banks=init_banks_db())
+
+# route for adding a bank
+@app.route('/add_bank', methods=['POST'])
+def add_bank():
+    global banks_data
+    if request.method == 'POST':
+        new_bank = {
+            'Bank_Code': int(request.form['Bank_Code']),
+            'Bank_Name': request.form['Bank_Name'],
+            'Address': request.form['Address'],
+            'City': request.form['City']
+        }
+        
+        # checking if bank code already exists
+        for bank in banks_data:
+            if bank['Bank_Code'] == new_bank['Bank_Code']:
+                flash('Bank code already exists', 'error')
+                return redirect(url_for('banks'))
+        
+        # Add the new bank
+        banks_data.append(new_bank)
+        flash('Bank added successfully', 'success')
+        return redirect(url_for('banks'))
+
+# New route for updating a bank
+@app.route('/update_bank', methods=['POST'])
+def update_bank():
+    global banks_data
+    if request.method == 'POST':
+        bank_code = int(request.form['Bank_Code'])
+        bank_name = request.form['Bank_Name']
+        address = request.form['Address']
+        city = request.form['City']
+        
+        for bank in banks_data:
+            if bank['Bank_Code'] == bank_code:
+                bank['Bank_Name'] = bank_name
+                bank['Address'] = address
+                bank['City'] = city
+                break
+        
+        flash('Bank updated successfully', 'success')
+        return redirect(url_for('banks'))
+
+# New route for deleting a bank
+@app.route('/delete_bank', methods=['POST'])
+def delete_bank():
+    global banks_data
+    if request.method == 'POST':
+        bank_code = int(request.form['Bank_Code'])
+        
+        # Find the bank with the given code and remove it
+        banks_data = [bank for bank in banks_data if bank['Bank_Code'] != bank_code]
+        
+        flash('Bank deleted successfully', 'success')
+        return redirect(url_for('banks'))
 
 @app.route('/branches')
 def branches():
