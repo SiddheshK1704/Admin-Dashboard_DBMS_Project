@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Management System - Banks</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    <title>Bank Management System - Dashboard</title>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Add Tailwind CSS from CDN -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-gray-100">
@@ -39,7 +37,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="{{ url_for('dashboard') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
+                        <a href="{{ url_for('dashboard') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-blue-500 bg-gray-700 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <i class="fas fa-tachometer-alt text-blue-400"></i>
                             </span>
@@ -47,7 +45,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url_for('banks') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-blue-500 bg-gray-700 pr-6">
+                        <a href="{{ url_for('banks') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-700 text-white border-l-4 border-transparent hover:border-blue-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <i class="fas fa-university text-blue-400"></i>
                             </span>
@@ -102,7 +100,7 @@
         <div class="md:ml-64 flex flex-col flex-1">
             <!-- Top Bar -->
             <div class="bg-white shadow-md py-3 px-4 md:px-6 flex justify-between items-center">
-                <h1 class="text-xl md:text-2xl font-semibold text-gray-800">Banks</h1>
+                <h1 class="text-xl md:text-2xl font-semibold text-gray-800">Dashboard</h1>
                 <div class="flex items-center space-x-4">
                     <div class="relative">
                         <button class="text-gray-500 hover:text-gray-700 focus:outline-none">
@@ -119,32 +117,82 @@
                 </div>
             </div>
 
-            <!-- Banks Content -->
-            <div class="p-4 md:p-6">
-                <!-- Banks Table -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bank Code</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bank Name</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            {% for bank in banks %}
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ bank.Bank_Code }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ bank.Bank_Name }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-500">{{ bank.Address }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ bank.City }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+            <!-- Dashboard Content -->
+            <div class="p-4 md:p-4">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Card 1: Total Banks -->
+                    <div class="bg-white rounded-lg shadow-md p-6 flex justify-center items-center">
+                        <div class="rounded-full bg-blue-100 p-4 mr-4">
+                            <i class="fas fa-university text-blue-600 text-2xl"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="text-gray-500 text-lg">Total Banks</h3>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">8</p>
+                            <!-- <p class="text-sm text-green-500 mt-2"><i class="fas fa-arrow-up"></i> 2 new this quarter</p> -->
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2: Total Branches -->
+                    <div class="bg-white rounded-lg shadow-md p-6 flex justify-center items-center">
+                        <div class="rounded-full bg-indigo-100 p-4 mr-4">
+                            <i class="fas fa-building text-indigo-600 text-2xl"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="text-gray-500 text-lg">Total Branches</h3>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">124</p>
+                            <!-- <p class="text-sm text-green-500 mt-2"><i class="fas fa-arrow-up"></i> 5% from last month</p> -->
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: Total Customers -->
+                    <div class="bg-white rounded-lg shadow-md p-6 flex justify-center items-center">
+                        <div class="rounded-full bg-purple-100 p-4 mr-4">
+                            <i class="fas fa-user-friends text-purple-600 text-2xl"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="text-gray-500 text-lg">Total Customers</h3>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">36,248</p>
+                            <!-- <p class="text-sm text-green-500 mt-2"><i class="fas fa-arrow-up"></i> 12% from last month</p> -->
+                        </div>
+                    </div>
+                    
+                    <!-- Card 4: Total Accounts -->
+                    <div class="bg-white rounded-lg shadow-md p-6 flex justify-center items-center">
+                        <div class="rounded-full bg-green-100 p-4 mr-4">
+                            <i class="fas fa-wallet text-green-600 text-2xl"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="text-gray-500 text-lg">Total Accounts</h3>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">42,156</p>
+                            <!-- <p class="text-sm text-green-500 mt-2"><i class="fas fa-arrow-up"></i> 7% from last month</p> -->
+                        </div>
+                    </div>
+                    
+                    <!-- Card 5: Total Employees -->
+                    <div class="bg-white rounded-lg shadow-md p-6 flex justify-center items-center">
+                        <div class="rounded-full bg-red-100 p-4 mr-4">
+                            <i class="fas fa-users text-red-600 text-2xl"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="text-gray-500 text-lg">Total Employees</h3>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">1,256</p>
+                            <!-- <p class="text-sm text-green-500 mt-2"><i class="fas fa-arrow-up"></i> 3% from last month</p> -->
+                        </div>
+                    </div>
+                    
+                    <!-- Card 6: Total Transactions -->
+                    <div class="bg-white rounded-lg shadow-md p-6 flex justify-center items-center">
+                        <div class="rounded-full bg-yellow-100 p-4 mr-4">
+                            <i class="fas fa-money-bill-wave text-yellow-600 text-2xl"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="text-gray-500 text-lg">Total Transactions</h3>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">₹28.5 CR</p>
+                            <!-- <p class="text-sm text-green-500 mt-2"><i class="fas fa-arrow-up"></i> 8% from last month</p> -->
+                        </div>
+                    </div>
                 </div>
-                
             </div>
         </div>
     </div>
