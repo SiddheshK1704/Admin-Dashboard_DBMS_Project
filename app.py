@@ -20,7 +20,7 @@ def calculate_dashboard_stats():
         'total_customers': len(customers),
         'total_accounts': len(accounts),
         'total_employees': len(employees),
-        'total_transactions': sum(payment['Payment_Amount'] for payment in payments) / 10000000  # Convert to Crores
+        'total_transactions': sum(payment['Payment_Amount'] for payment in payments) / 100000  # Convert to Lakhs
     }
     return stats
 
@@ -44,31 +44,39 @@ banks_data = [
 
 # Initialize sample data for employees.html (replace with actual db tables data)
 def init_employee_db():
-    sample_employees = [
-        {'Emp_ID': 1001, 'Emp_Name': 'Rajesh Kumar', 'Mobile_No': '9876543210', 'Address': '42 Green Park, New Delhi', 'Bank_Code': 101},
-        {'Emp_ID': 1002, 'Emp_Name': 'Priya Sharma', 'Mobile_No': '8765432109', 'Address': '15 Juhu Beach Road, Mumbai', 'Bank_Code': 102},
-        {'Emp_ID': 1003, 'Emp_Name': 'Amit Patel', 'Mobile_No': '7654321098', 'Address': '78 MG Road, Bangalore', 'Bank_Code': 103},
-        {'Emp_ID': 1004, 'Emp_Name': 'Neha Singh', 'Mobile_No': '6543210987', 'Address': '123 Park Street, Kolkata', 'Bank_Code': 104},
-        {'Emp_ID': 1005, 'Emp_Name': 'Vikram Reddy', 'Mobile_No': '5432109876', 'Address': '56 Anna Salai, Chennai', 'Bank_Code': 105},
-        {'Emp_ID': 1006, 'Emp_Name': 'Kavita Gupta', 'Mobile_No': '4321098765', 'Address': '89 Cyber Hub, Gurugram', 'Bank_Code': 106},
-        {'Emp_ID': 1007, 'Emp_Name': 'Rahul Verma', 'Mobile_No': '3210987654', 'Address': '34 Civil Lines, Jaipur', 'Bank_Code': 107},
-        {'Emp_ID': 1008, 'Emp_Name': 'Ananya Joshi', 'Mobile_No': '2109876543', 'Address': '67 FC Road, Pune', 'Bank_Code': 108}
-    ]
-    return sample_employees
+    # This would typically be replaced with database operations
+    global employees_data
+    return employees_data
+
+# Storage for employees (simulating a database)
+employees_data = [
+    {'Emp_ID': 1001, 'Emp_Name': 'Rajesh Kumar', 'Mobile_No': '9876543210', 'Address': '42 Green Park, New Delhi', 'Bank_Code': 101},
+    {'Emp_ID': 1002, 'Emp_Name': 'Priya Sharma', 'Mobile_No': '8765432109', 'Address': '15 Juhu Beach Road, Mumbai', 'Bank_Code': 102},
+    {'Emp_ID': 1003, 'Emp_Name': 'Amit Patel', 'Mobile_No': '7654321098', 'Address': '78 MG Road, Bangalore', 'Bank_Code': 103},
+    {'Emp_ID': 1004, 'Emp_Name': 'Neha Singh', 'Mobile_No': '6543210987', 'Address': '123 Park Street, Kolkata', 'Bank_Code': 104},
+    {'Emp_ID': 1005, 'Emp_Name': 'Vikram Reddy', 'Mobile_No': '5432109876', 'Address': '56 Anna Salai, Chennai', 'Bank_Code': 105},
+    {'Emp_ID': 1006, 'Emp_Name': 'Kavita Gupta', 'Mobile_No': '4321098765', 'Address': '89 Cyber Hub, Gurugram', 'Bank_Code': 106},
+    {'Emp_ID': 1007, 'Emp_Name': 'Rahul Verma', 'Mobile_No': '3210987654', 'Address': '34 Civil Lines, Jaipur', 'Bank_Code': 107},
+    {'Emp_ID': 1008, 'Emp_Name': 'Ananya Joshi', 'Mobile_No': '2109876543', 'Address': '67 FC Road, Pune', 'Bank_Code': 108}
+]
 
 # Initialize sample data for customers.html (replace with actual db tables data)
 def init_customers_db():
-    sample_customers = [
-        {'Cust_ID': 2001, 'F_Name': 'Aditya', 'L_Name': 'Sharma', 'Mobile_No': '9988776655', 'E_Mail': 'aditya.sharma@email.com', 'Address': '78 Rajouri Garden, New Delhi'},
-        {'Cust_ID': 2002, 'F_Name': 'Sneha', 'L_Name': 'Mehta', 'Mobile_No': '8877665544', 'E_Mail': 'sneha.mehta@email.com', 'Address': '23 Andheri West, Mumbai'},
-        {'Cust_ID': 2003, 'F_Name': 'Karan', 'L_Name': 'Malhotra', 'Mobile_No': '7766554433', 'E_Mail': 'karan.m@email.com', 'Address': '45 Koramangala, Bangalore'},
-        {'Cust_ID': 2004, 'F_Name': 'Meera', 'L_Name': 'Banerjee', 'Mobile_No': '6655443322', 'E_Mail': 'meera.b@email.com', 'Address': '12 Lake Town, Kolkata'},
-        {'Cust_ID': 2005, 'F_Name': 'Rohan', 'L_Name': 'Desai', 'Mobile_No': '5544332211', 'E_Mail': 'rohan.d@email.com', 'Address': '34 T Nagar, Chennai'},
-        {'Cust_ID': 2006, 'F_Name': 'Pooja', 'L_Name': 'Agarwal', 'Mobile_No': '4433221100', 'E_Mail': 'pooja.a@email.com', 'Address': '56 Sector 29, Gurugram'},
-        {'Cust_ID': 2007, 'F_Name': 'Arjun', 'L_Name': 'Singh', 'Mobile_No': '3322110099', 'E_Mail': 'arjun.s@email.com', 'Address': '89 Malviya Nagar, Jaipur'},
-        {'Cust_ID': 2008, 'F_Name': 'Nisha', 'L_Name': 'Patil', 'Mobile_No': '2211009988', 'E_Mail': 'nisha.p@email.com', 'Address': '32 Kothrud, Pune'}
-    ]
-    return sample_customers
+    # This would typically be replaced with database operations
+    global customers_data
+    return customers_data
+
+# Define global variable for customers_data
+customers_data = [
+    {'Cust_ID': 2001, 'F_Name': 'Aditya', 'L_Name': 'Sharma', 'Mobile_No': '9988776655', 'E_Mail': 'aditya.sharma@email.com', 'Address': '78 Rajouri Garden, New Delhi'},
+    {'Cust_ID': 2002, 'F_Name': 'Sneha', 'L_Name': 'Mehta', 'Mobile_No': '8877665544', 'E_Mail': 'sneha.mehta@email.com', 'Address': '23 Andheri West, Mumbai'},
+    {'Cust_ID': 2003, 'F_Name': 'Karan', 'L_Name': 'Malhotra', 'Mobile_No': '7766554433', 'E_Mail': 'karan.m@email.com', 'Address': '45 Koramangala, Bangalore'},
+    {'Cust_ID': 2004, 'F_Name': 'Meera', 'L_Name': 'Banerjee', 'Mobile_No': '6655443322', 'E_Mail': 'meera.b@email.com', 'Address': '12 Lake Town, Kolkata'},
+    {'Cust_ID': 2005, 'F_Name': 'Rohan', 'L_Name': 'Desai', 'Mobile_No': '5544332211', 'E_Mail': 'rohan.d@email.com', 'Address': '34 T Nagar, Chennai'},
+    {'Cust_ID': 2006, 'F_Name': 'Pooja', 'L_Name': 'Agarwal', 'Mobile_No': '4433221100', 'E_Mail': 'pooja.a@email.com', 'Address': '56 Sector 29, Gurugram'},
+    {'Cust_ID': 2007, 'F_Name': 'Arjun', 'L_Name': 'Singh', 'Mobile_No': '3322110099', 'E_Mail': 'arjun.s@email.com', 'Address': '89 Malviya Nagar, Jaipur'},
+    {'Cust_ID': 2008, 'F_Name': 'Nisha', 'L_Name': 'Patil', 'Mobile_No': '2211009988', 'E_Mail': 'nisha.p@email.com', 'Address': '32 Kothrud, Pune'}
+]
 
 # Initialize sample data for transactions.html (replace with actual db tables data)
 def init_payments_db():
@@ -85,9 +93,13 @@ def init_payments_db():
     return sample_payments
 
 # Initialize sample data for loans.html (replace with actual db tables data)
+
 def init_loans_db():
     # Using customer IDs from the customers sample data for reference
-    sample_loans = [
+    global loans_data
+    return loans_data
+
+loans_data = [
         {'Loan_No': 3001, 'Amount': 250000.00, 'Cust_ID': 2001, 'Customer_Name': 'Aditya Sharma'},
         {'Loan_No': 3002, 'Amount': 500000.00, 'Cust_ID': 2003, 'Customer_Name': 'Karan Malhotra'},
         {'Loan_No': 3003, 'Amount': 750000.00, 'Cust_ID': 2005, 'Customer_Name': 'Rohan Desai'},
@@ -97,11 +109,15 @@ def init_loans_db():
         {'Loan_No': 3007, 'Amount': 175000.00, 'Cust_ID': 2006, 'Customer_Name': 'Pooja Agarwal'},
         {'Loan_No': 3008, 'Amount': 125000.00, 'Cust_ID': 2008, 'Customer_Name': 'Nisha Patil'}
     ]
-    return sample_loans
+
 
 # Initialize sample data for accounts.html (replace with actual db tables data)
 def init_accounts_db():
-    sample_accounts = [
+    # This would typically be replaced with database operations
+    global accounts_data
+    return accounts_data
+
+accounts_data = [
         {'Account_No': 5001, 'balance': 25000.50, 'Cust_ID': 2001},
         {'Account_No': 5002, 'balance': 78456.75, 'Cust_ID': 2002},
         {'Account_No': 5003, 'balance': 12500.00, 'Cust_ID': 2003},
@@ -111,21 +127,25 @@ def init_accounts_db():
         {'Account_No': 5007, 'balance': 78956.23, 'Cust_ID': 2007},
         {'Account_No': 5008, 'balance': 123456.78, 'Cust_ID': 2008}
     ]
-    return sample_accounts
+    
 
 # Initialize sample data for branches.html (replace with actual db tables data)
 def init_branches_db():
-    sample_branches = [
-        {'Branch_Code': 201, 'Branch_Name': 'Main Branch - Delhi', 'Address': '123 Connaught Place, New Delhi', 'Bank_Code': 101},
-        {'Branch_Code': 202, 'Branch_Name': 'Corporate Branch - Mumbai', 'Address': '456 Bandra Kurla Complex, Mumbai', 'Bank_Code': 102},
-        {'Branch_Code': 203, 'Branch_Name': 'Tech Park Branch', 'Address': '789 Electronic City, Bangalore', 'Bank_Code': 103},
-        {'Branch_Code': 204, 'Branch_Name': 'East Kolkata Branch', 'Address': '321 Salt Lake Sector V, Kolkata', 'Bank_Code': 104},
-        {'Branch_Code': 205, 'Branch_Name': 'T Nagar Branch', 'Address': '654 Anna Salai, Chennai', 'Bank_Code': 105},
-        {'Branch_Code': 206, 'Branch_Name': 'Cyber City Branch', 'Address': '987 DLF Phase 3, Gurugram', 'Bank_Code': 106},
-        {'Branch_Code': 207, 'Branch_Name': 'Pink City Branch', 'Address': '753 MI Road, Jaipur', 'Bank_Code': 107},
-        {'Branch_Code': 208, 'Branch_Name': 'Koregaon Park Branch', 'Address': '159 FC Road, Pune', 'Bank_Code': 108}
-    ]
-    return sample_branches
+    # This would typically be replaced with database operations
+    global branches_data
+    return branches_data
+
+# Storage for branches (simulating a database)
+branches_data = [
+    {'Branch_Code': 201, 'Branch_Name': 'Main Branch - Delhi', 'Address': '123 Connaught Place, New Delhi', 'Bank_Code': 101},
+    {'Branch_Code': 202, 'Branch_Name': 'Corporate Branch - Mumbai', 'Address': '456 Bandra Kurla Complex, Mumbai', 'Bank_Code': 102},
+    {'Branch_Code': 203, 'Branch_Name': 'Tech Park Branch', 'Address': '789 Electronic City, Bangalore', 'Bank_Code': 103},
+    {'Branch_Code': 204, 'Branch_Name': 'East Kolkata Branch', 'Address': '321 Salt Lake Sector V, Kolkata', 'Bank_Code': 104},
+    {'Branch_Code': 205, 'Branch_Name': 'T Nagar Branch', 'Address': '654 Anna Salai, Chennai', 'Bank_Code': 105},
+    {'Branch_Code': 206, 'Branch_Name': 'Cyber City Branch', 'Address': '987 DLF Phase 3, Gurugram', 'Bank_Code': 106},
+    {'Branch_Code': 207, 'Branch_Name': 'Pink City Branch', 'Address': '753 MI Road, Jaipur', 'Bank_Code': 107},
+    {'Branch_Code': 208, 'Branch_Name': 'Koregaon Park Branch', 'Address': '159 FC Road, Pune', 'Bank_Code': 108}
+]
 
 # Initialize sample data for account_types.html (replace with actual db tables data)
 def init_account_types_db():
@@ -234,13 +254,190 @@ def delete_bank():
 def branches():
     return render_template('branches.html', branches=init_branches_db())
 
+# Route for adding a branch
+@app.route('/add_branch', methods=['POST'])
+def add_branch():
+    global branches_data
+    if request.method == 'POST':
+        new_branch = {
+            'Branch_Code': int(request.form['Branch_Code']),
+            'Branch_Name': request.form['Branch_Name'],
+            'Address': request.form['Address'],
+            'Bank_Code': int(request.form['Bank_Code'])
+        }
+        
+        # Check if branch code already exists
+        for branch in branches_data:
+            if branch['Branch_Code'] == new_branch['Branch_Code']:
+                flash('Branch code already exists', 'error')
+                return redirect(url_for('branches'))
+        
+        # Add the new branch
+        branches_data.append(new_branch)
+        flash('Branch added successfully', 'success')
+        return redirect(url_for('branches'))
+
+# Route for updating a branch
+@app.route('/update_branch', methods=['POST'])
+def update_branch():
+    global branches_data
+    if request.method == 'POST':
+        branch_code = int(request.form['Branch_Code'])
+        branch_name = request.form['Branch_Name']
+        address = request.form['Address']
+        bank_code = int(request.form['Bank_Code'])
+        
+        for branch in branches_data:
+            if branch['Branch_Code'] == branch_code:
+                branch['Branch_Name'] = branch_name
+                branch['Address'] = address
+                branch['Bank_Code'] = bank_code
+                break
+        
+        flash('Branch updated successfully', 'success')
+        return redirect(url_for('branches'))
+
+# Route for deleting a branch
+@app.route('/delete_branch', methods=['POST'])
+def delete_branch():
+    global branches_data
+    if request.method == 'POST':
+        branch_code = int(request.form['Branch_Code'])
+        
+        # Find the branch with the given code and remove it
+        branches_data = [branch for branch in branches_data if branch['Branch_Code'] != branch_code]
+        
+        flash('Branch deleted successfully', 'success')
+        return redirect(url_for('branches'))
+
 @app.route('/employees')
 def employees():
     return render_template('employees.html', employees=init_employee_db())
 
+# Route for adding an employee
+@app.route('/add_employee', methods=['POST'])
+def add_employee():
+    global employees_data
+    if request.method == 'POST':
+        new_employee = {
+            'Emp_ID': int(request.form['Emp_ID']),
+            'Emp_Name': request.form['Emp_Name'],
+            'Mobile_No': request.form['Mobile_No'],
+            'Address': request.form['Address'],
+            'Bank_Code': int(request.form['Bank_Code'])
+        }
+        
+        # Check if employee ID already exists
+        for employee in employees_data:
+            if employee['Emp_ID'] == new_employee['Emp_ID']:
+                flash('Employee ID already exists', 'error')
+                return redirect(url_for('employees'))
+        
+        # Add the new employee
+        employees_data.append(new_employee)
+        flash('Employee added successfully', 'success')
+        return redirect(url_for('employees'))
+
+# Route for updating an employee
+@app.route('/update_employee', methods=['POST'])
+def update_employee():
+    global employees_data
+    if request.method == 'POST':
+        emp_id = int(request.form['Emp_ID'])
+        emp_name = request.form['Emp_Name']
+        mobile_no = request.form['Mobile_No']
+        address = request.form['Address']
+        bank_code = int(request.form['Bank_Code'])
+        
+        for employee in employees_data:
+            if employee['Emp_ID'] == emp_id:
+                employee['Emp_Name'] = emp_name
+                employee['Mobile_No'] = mobile_no
+                employee['Address'] = address
+                employee['Bank_Code'] = bank_code
+                break
+        
+        flash('Employee updated successfully', 'success')
+        return redirect(url_for('employees'))
+
+# Route for deleting an employee
+@app.route('/delete_employee', methods=['POST'])
+def delete_employee():
+    global employees_data
+    if request.method == 'POST':
+        emp_id = int(request.form['Emp_ID'])
+        
+        # Find the employee with the given ID and remove it
+        employees_data = [employee for employee in employees_data if employee['Emp_ID'] != emp_id]
+        
+        flash('Employee deleted successfully', 'success')
+        return redirect(url_for('employees'))
+
 @app.route('/customers')
 def customers():
     return render_template('customers.html',customers=init_customers_db())
+
+# Route for adding a customer
+@app.route('/add_customer', methods=['POST'])
+def add_customer():
+    global customers_data
+    if request.method == 'POST':
+        new_customer = {
+            'Cust_ID': int(request.form['Cust_ID']),
+            'F_Name': request.form['F_Name'],
+            'L_Name': request.form['L_Name'],
+            'Mobile_No': request.form['Mobile_No'],
+            'E_Mail': request.form['E_Mail'],
+            'Address': request.form['Address']
+        }
+        
+        # Check if customer ID already exists
+        for customer in customers_data:
+            if customer['Cust_ID'] == new_customer['Cust_ID']:
+                flash('Customer ID already exists', 'error')
+                return redirect(url_for('customers'))
+        
+        # Add the new customer
+        customers_data.append(new_customer)
+        flash('Customer added successfully', 'success')
+        return redirect(url_for('customers'))
+
+# Route for updating a customer
+@app.route('/update_customer', methods=['POST'])
+def update_customer():
+    global customers_data
+    if request.method == 'POST':
+        cust_id = int(request.form['Cust_ID'])
+        f_name = request.form['F_Name']
+        l_name = request.form['L_Name']
+        mobile_no = request.form['Mobile_No']
+        e_mail = request.form['E_Mail']
+        address = request.form['Address']
+        
+        for customer in customers_data:
+            if customer['Cust_ID'] == cust_id:
+                customer['F_Name'] = f_name
+                customer['L_Name'] = l_name
+                customer['Mobile_No'] = mobile_no
+                customer['E_Mail'] = e_mail
+                customer['Address'] = address
+                break
+        
+        flash('Customer updated successfully', 'success')
+        return redirect(url_for('customers'))
+
+# Route for deleting a customer
+@app.route('/delete_customer', methods=['POST'])
+def delete_customer():
+    global customers_data
+    if request.method == 'POST':
+        cust_id = int(request.form['Cust_ID'])
+        
+        # Find the customer with the given ID and remove it
+        customers_data = [customer for customer in customers_data if customer['Cust_ID'] != cust_id]
+        
+        flash('Customer deleted successfully', 'success')
+        return redirect(url_for('customers'))
 
 @app.route('/transactions')
 def transactions():
@@ -252,7 +449,7 @@ def transactions():
 
 @app.route('/loans')
 def loans():
-    loans_data = init_loans_db()
+    global loans_data
     # Calculate summary metrics
     total_amount = sum(loan['Amount'] for loan in loans_data)
     avg_amount = round(total_amount / len(loans_data), 2) if loans_data else 0
@@ -294,6 +491,115 @@ def loan_payments():
                           unique_loans_count=unique_loans_count,
                           avg_payments_per_loan=avg_payments_per_loan)
 
+# Route for adding a loan
+@app.route('/add_loan', methods=['POST'])
+def add_loan():
+    global loans_data
+    if request.method == 'POST':
+        new_loan = {
+            'Loan_No': int(request.form['Loan_No']),
+            'Amount': float(request.form['Amount']),
+            'Cust_ID': int(request.form['Cust_ID']),
+            'Customer_Name': request.form['Customer_Name']
+        }
+        
+        # Check if loan number already exists
+        for loan in loans_data:
+            if loan['Loan_No'] == new_loan['Loan_No']:
+                flash('Loan number already exists', 'error')
+                return redirect(url_for('loans'))
+        
+        # Add the new loan
+        loans_data.append(new_loan)
+        flash('Loan added successfully', 'success')
+        return redirect(url_for('loans'))
 
+# Route for updating a loan
+@app.route('/update_loan', methods=['POST'])
+def update_loan():
+    global loans_data
+    if request.method == 'POST':
+        loan_no = int(request.form['Loan_No'])
+        amount = float(request.form['Amount'])
+        cust_id = int(request.form['Cust_ID'])
+        customer_name = request.form['Customer_Name']
+        
+        for loan in loans_data:
+            if loan['Loan_No'] == loan_no:
+                loan['Amount'] = amount
+                loan['Cust_ID'] = cust_id
+                loan['Customer_Name'] = customer_name
+                break
+        
+        flash('Loan updated successfully', 'success')
+        return redirect(url_for('loans'))
+
+# Route for deleting a loan
+@app.route('/delete_loan', methods=['POST'])
+def delete_loan():
+    global loans_data
+    if request.method == 'POST':
+        loan_no = int(request.form['Loan_No'])
+        
+        # Find the loan with the given number and remove it
+        loans_data = [loan for loan in loans_data if loan['Loan_No'] != loan_no]
+        
+        flash('Loan deleted successfully', 'success')
+        return redirect(url_for('loans'))
+
+# Route for adding an account
+@app.route('/add_account', methods=['POST'])
+def add_account():
+    global accounts_data
+    if request.method == 'POST':
+        new_account = {
+            'Account_No': int(request.form['Account_No']),
+            'balance': float(request.form['balance']),
+            'Cust_ID': int(request.form['Cust_ID'])
+        }
+        
+        # Check if account number already exists
+        for account in accounts_data:
+            if account['Account_No'] == new_account['Account_No']:
+                flash('Account number already exists', 'error')
+                return redirect(url_for('accounts'))
+        
+        # Add the new account
+        accounts_data.append(new_account)
+        flash('Account added successfully', 'success')
+        return redirect(url_for('accounts'))
+
+# Route for updating an account
+@app.route('/update_account', methods=['POST'])
+def update_account():
+    global accounts_data
+    if request.method == 'POST':
+        account_no = int(request.form['Account_No'])
+        balance = float(request.form['balance'])
+        cust_id = int(request.form['Cust_ID'])
+        
+        for account in accounts_data:
+            if account['Account_No'] == account_no:
+                account['balance'] = balance
+                account['Cust_ID'] = cust_id
+                break
+        
+        flash('Account updated successfully', 'success')
+        return redirect(url_for('accounts'))
+
+# Route for deleting an account
+@app.route('/delete_account', methods=['POST'])
+def delete_account():
+    global accounts_data
+    if request.method == 'POST':
+        account_no = int(request.form['Account_No'])
+        
+        # Find the account with the given number and remove it
+        accounts_data = [account for account in accounts_data if account['Account_No'] != account_no]
+        
+        flash('Account deleted successfully', 'success')
+        return redirect(url_for('accounts'))
+    
+    
 if __name__ == '__main__':
     app.run(debug=True)

@@ -109,6 +109,11 @@
             <div class="bg-white shadow-md py-3 px-4 md:px-6 flex justify-between items-center">
                 <h1 class="text-xl md:text-2xl font-semibold text-gray-800">Accounts</h1>
                 <div class="flex items-center space-x-4">
+                    <!-- Add New Account Button -->
+                    <button id="addAccountBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center">
+                        <i class="fas fa-plus mr-2"></i>
+                        <span>Add New Account</span>
+                    </button>
                     <div class="relative">
                         <button class="text-gray-500 hover:text-gray-700 focus:outline-none">
                             <i class="fas fa-bell text-xl"></i>
@@ -134,6 +139,7 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Account Number</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Balance</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -142,6 +148,20 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ account.Account_No }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{{ '{:,.2f}'.format(account.balance) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ account.Cust_ID }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <div class="flex space-x-2">
+                                        <button class="updateAccountBtn text-blue-500 hover:text-blue-700" 
+                                                data-account-no="{{ account.Account_No }}" 
+                                                data-balance="{{ account.balance }}" 
+                                                data-cust-id="{{ account.Cust_ID }}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="deleteAccountBtn text-red-500 hover:text-red-700" 
+                                                data-account-no="{{ account.Account_No }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -198,6 +218,105 @@
                 </div>
             </div>
         </div>
+
+        <!-- Add Account Modal -->
+        <div id="addAccountModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-40">
+            <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4">
+                <div class="flex justify-between items-center p-4 border-b">
+                    <h3 class="text-lg font-semibold text-gray-800">Add New Account</h3>
+                    <button class="closeModal text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="addAccountForm" action="{{ url_for('add_account') }}" method="POST">
+                    <div class="p-4 space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Account Number</label>
+                            <input type="text" name="Account_No" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Balance</label>
+                            <input type="text" name="balance" step="0.01" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Customer ID</label>
+                            <input type="text" name="Cust_ID" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-end space-x-2">
+                        <button type="button" class="closeModal py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Cancel
+                        </button>
+                        <button type="submit" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Update Account Modal -->
+        <div id="updateAccountModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-40">
+            <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4">
+                <div class="flex justify-between items-center p-4 border-b">
+                    <h3 class="text-lg font-semibold text-gray-800">Update Account</h3>
+                    <button class="closeModal text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="updateAccountForm" action="{{ url_for('update_account') }}" method="POST">
+                    <div class="p-4 space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Account Number</label>
+                            <input type="text" name="Account_No" id="update_Account_No" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Balance</label>
+                            <input type="text" name="balance" id="update_balance" step="0.01" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Customer ID</label>
+                            <input type="text" name="Cust_ID" id="update_Cust_ID" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-end space-x-2">
+                        <button type="button" class="closeModal py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Cancel
+                        </button>
+                        <button type="submit" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div id="deleteAccountModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-40">
+            <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4">
+                <div class="flex justify-between items-center p-4 border-b">
+                    <h3 class="text-lg font-semibold text-gray-800">Confirm Delete</h3>
+                    <button class="closeModal text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <p class="text-gray-600">Are you sure you want to delete account number: <span id="deleteAccountNumber" class="font-semibold"></span>?</p>
+                    <p class="text-gray-500 text-sm mt-2">This action cannot be undone.</p>
+                </div>
+                <form id="deleteAccountForm" action="{{ url_for('delete_account') }}" method="POST">
+                    <input type="hidden" name="Account_No" id="delete_Account_No">
+                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-end space-x-2">
+                        <button type="button" class="closeModal py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Cancel
+                        </button>
+                        <button type="submit" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                            Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -205,6 +324,78 @@
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('-translate-x-full');
+        });
+        
+        // Modal functions
+        const addAccountModal = document.getElementById('addAccountModal');
+        const updateAccountModal = document.getElementById('updateAccountModal');
+        const deleteAccountModal = document.getElementById('deleteAccountModal');
+        const addAccountBtn = document.getElementById('addAccountBtn');
+        const updateAccountBtns = document.querySelectorAll('.updateAccountBtn');
+        const deleteAccountBtns = document.querySelectorAll('.deleteAccountBtn');
+        const closeModalBtns = document.querySelectorAll('.closeModal');
+        
+        // Open Add Account Modal
+        addAccountBtn.addEventListener('click', function() {
+            addAccountModal.classList.remove('hidden');
+            addAccountModal.classList.add('flex');
+        });
+        
+        // Update Account Button Click
+        updateAccountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const accountNo = this.getAttribute('data-account-no');
+                const balance = this.getAttribute('data-balance');
+                const custId = this.getAttribute('data-cust-id');
+                
+                document.getElementById('update_Account_No').value = accountNo;
+                document.getElementById('update_balance').value = balance;
+                document.getElementById('update_Cust_ID').value = custId;
+                
+                updateAccountModal.classList.remove('hidden');
+                updateAccountModal.classList.add('flex');
+            });
+        });
+        
+        // Delete Account Button Click
+        deleteAccountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const accountNo = this.getAttribute('data-account-no');
+                
+                document.getElementById('delete_Account_No').value = accountNo;
+                document.getElementById('deleteAccountNumber').textContent = accountNo;
+                
+                deleteAccountModal.classList.remove('hidden');
+                deleteAccountModal.classList.add('flex');
+            });
+        });
+        
+        // Close Modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                addAccountModal.classList.add('hidden');
+                addAccountModal.classList.remove('flex');
+                updateAccountModal.classList.add('hidden');
+                updateAccountModal.classList.remove('flex');
+                deleteAccountModal.classList.add('hidden');
+                deleteAccountModal.classList.remove('flex');
+            });
+        });
+        
+        // Close Modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === addAccountModal) {
+                addAccountModal.classList.add('hidden');
+                addAccountModal.classList.remove('flex');
+            }
+            if (e.target === updateAccountModal) {
+                updateAccountModal.classList.add('hidden');
+                updateAccountModal.classList.remove('flex');
+            }
+            if (e.target === deleteAccountModal) {
+                deleteAccountModal.classList.add('hidden');
+                deleteAccountModal.classList.remove('flex');
+            }
         });
     </script>
 </body>
