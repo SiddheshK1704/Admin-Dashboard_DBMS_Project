@@ -15,6 +15,8 @@ A responsive and modern Bank Administration Dashboard created as a DBMS project.
 
 ```
 DBMS-Project/
+├── static/
+│   ├── DashboardSS.png.html
 ├── templates/
 │   ├── account_types.html
 │   ├── accounts.html
@@ -23,14 +25,15 @@ DBMS-Project/
 │   ├── customers.html
 │   ├── dashboard.html
 │   ├── employees.html
+│   ├── index.html
 │   ├── loan_payments.html
 │   ├── loans.html
 │   ├── transactions.html
 ├── venv/
 ├── .gitignore
 ├── app.py
-├── DashboardSS.png
 ├── README.md
+
 
 ```
 
