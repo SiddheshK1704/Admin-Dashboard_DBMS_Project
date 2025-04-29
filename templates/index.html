@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BankAdmin - Modern Banking Management System</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a365d 0%, #2563eb 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-university text-blue-600 text-2xl mr-2"></i>
+                <span class="text-gray-800 font-bold text-xl">BankAdmin</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#features" class="text-gray-600 hover:text-blue-600 font-medium">Features</a>
+                <a href="#benefits" class="text-gray-600 hover:text-blue-600 font-medium">Benefits</a>
+            </div>
+            <a href="{{ url_for('dashboard') }}" class="hidden md:block bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md transition duration-300">
+                Try Now
+            </a>
+            <button class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Modern Banking Management System</h1>
+                    <p class="text-lg md:text-xl mb-8 opacity-90">Streamline your banking operations with our comprehensive management solution. Manage banks, branches, employees, customers, and transactions all in one place.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="{{ url_for('dashboard') }}" class="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 py-3 rounded-md text-center transition duration-300">
+                            Try Now
+                        </a>
+                        <a href="#features" class="border border-white text-white hover:bg-white hover:text-blue-400 font-medium px-8 py-3 rounded-md text-center transition duration-300 learn-more">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="{{ url_for('static', filename='DashboardSS.png') }}" alt="Dashboard Preview" class="rounded-lg shadow-2xl" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Powerful Features</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our bank management system comes with everything you need to manage your banking operations efficiently.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature Card 1 -->
+                <div class="bg-white rounded-lg shadow-md p-6 transition duration-300 card-hover border-t-4 border-blue-500">
+                    <div class="rounded-full bg-blue-100 p-4 inline-block mb-4">
+                        <i class="fas fa-university text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Bank & Branch Management</h3>
+                    <p class="text-gray-600">Easily manage multiple banks and their branches from a single dashboard. Streamline branch operations with centralized control.</p>
+                </div>
+                
+                <!-- Feature Card 2 -->
+                <div class="bg-white rounded-lg shadow-md p-6 transition duration-300 card-hover border-t-4 border-indigo-500">
+                    <div class="rounded-full bg-indigo-100 p-4 inline-block mb-4">
+                        <i class="fas fa-users text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Customer & Employee Tracking</h3>
+                    <p class="text-gray-600">Manage customer profiles and employee records with ease. Access important information instantly and maintain up-to-date records.</p>
+                </div>
+                
+                <!-- Feature Card 3 -->
+                <div class="bg-white rounded-lg shadow-md p-6 transition duration-300 card-hover border-t-4 border-green-500">
+                    <div class="rounded-full bg-green-100 p-4 inline-block mb-4">
+                        <i class="fas fa-exchange-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Transaction Processing</h3>
+                    <p class="text-gray-600">Monitor and process transactions in real-time. Simplify complex financial operations with our intuitive transaction interface.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Why Choose BankAdmin?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our system is designed to make banking operations smoother, faster, and more secure.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Benefit 1 -->
+                <div class="flex space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-full bg-blue-100 p-3">
+                            <i class="fas fa-wallet text-blue-600"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Account Tracking</h3>
+                        <p class="text-gray-600">Monitor all accounts in real-time with complete visibility into balances and transaction history.</p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="flex space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-full bg-blue-100 p-3">
+                            <i class="fas fa-tachometer-alt text-blue-600"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Efficient Dashboard</h3>
+                        <p class="text-gray-600">Get a comprehensive view of all your banking metrics in one intuitive dashboard.</p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="flex space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-full bg-blue-100 p-3">
+                            <i class="fas fa-hand-holding-usd text-blue-600"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Loan Management</h3>
+                        <p class="text-gray-600">Simplify the loan approval process and track loan payments with our integrated loan management module.</p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="flex space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-full bg-blue-100 p-3">
+                            <i class="fas fa-building text-blue-600"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">All Your Banks in One Place</h3>
+                        <p class="text-gray-600">Centralize management of multiple banking institutions through a single unified interface.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 hero-gradient text-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Banking Operations?</h2>
+            <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">Get started with our comprehensive banking management system today.</p>
+            <a href="{{ url_for('dashboard') }}" class="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 py-3 rounded-md inline-block transition duration-300">
+                Try Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-university text-blue-400 text-2xl mr-2"></i>
+                        <span class="text-white font-bold text-xl">BankAdmin</span>
+                    </div>
+                    <p class="text-gray-400">Modern banking management system designed for efficiency and security.</p>
+                </div>
+                <div class="md:text-right">
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-blue-400">Features</a></li>
+                        <li><a href="#benefits" class="text-gray-400 hover:text-blue-400">Benefits</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 BankAdmin. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

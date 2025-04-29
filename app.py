@@ -185,6 +185,10 @@ def init_loan_payments_db():
 
 
 @app.route('/')
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
 @app.route('/dashboard')
 def dashboard():
     stats = calculate_dashboard_stats()
