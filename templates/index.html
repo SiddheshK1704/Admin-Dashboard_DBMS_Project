@@ -15,26 +15,48 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
+        /* Mobile menu transition */
+        .mobile-menu {
+            transition: max-height 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .mobile-menu.open {
+            max-height: 200px;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
     <nav class="bg-white shadow-md px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <i class="fas fa-university text-blue-600 text-2xl mr-2"></i>
-                <span class="text-gray-800 font-bold text-xl">BankAdmin</span>
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-university text-blue-600 text-2xl mr-2"></i>
+                    <span class="text-gray-800 font-bold text-xl">BankAdmin</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#features" class="text-gray-600 hover:text-blue-600 font-medium">Features</a>
+                    <a href="#benefits" class="text-gray-600 hover:text-blue-600 font-medium">Benefits</a>
+                </div>
+                <a href="{{ url_for('dashboard') }}" class="hidden md:block bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md transition duration-300">
+                    Try Now
+                </a>
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#features" class="text-gray-600 hover:text-blue-600 font-medium">Features</a>
-                <a href="#benefits" class="text-gray-600 hover:text-blue-600 font-medium">Benefits</a>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden mt-4">
+                <div class="flex flex-col space-y-2 py-3">
+                    <a href="#features" class="text-gray-600 hover:text-blue-600 font-medium py-2">Features</a>
+                    <a href="#benefits" class="text-gray-600 hover:text-blue-600 font-medium py-2">Benefits</a>
+                    <a href="{{ url_for('dashboard') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md text-center transition duration-300 mt-2">
+                        Try Now
+                    </a>
+                </div>
             </div>
-            <a href="{{ url_for('dashboard') }}" class="hidden md:block bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md transition duration-300">
-                Try Now
-            </a>
-            <button class="md:hidden text-gray-600 focus:outline-none">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
         </div>
     </nav>
 
@@ -211,6 +233,35 @@
                 });
             });
         });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('open');
+                // Optional: Toggle icon between bars and X
+                const icon = mobileMenuButton.querySelector('i');
+                if (icon.classList.contains('fa-bars')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close mobile menu when clicking on a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('open');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
     </script>
 </body>
 </html>
