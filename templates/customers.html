@@ -109,6 +109,32 @@
             <div class="bg-white shadow-md py-3 px-4 md:px-6 flex justify-between items-center">
                 <h1 class="text-xl md:text-2xl font-semibold text-gray-800">Customers</h1>
                 <div class="flex items-center space-x-4">
+
+                        <!-- Search and Sort -->
+                        <form action="{{ url_for('customers') }}" method="GET" class="flex items-center space-x-2">
+                            <div class="relative">
+                                <input type="text" name="search" value="{{ search_query if search_query else '' }}" placeholder="Search in all columns..." class="pr-8 pl-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+                                <button type="submit" class="absolute right-2 top-2.5 text-gray-400">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="relative">
+                                <select name="sort" onchange="this.form.submit()" class="pl-3 pr-8 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 appearance-none">
+                                    <option value="" disabled {% if not sort_by %}selected{% endif %}>Sort by...</option>
+                                    <option value="Cust_ID" {% if sort_by == 'Cust_ID' %}selected{% endif %}>Customer ID</option>
+                                    <option value="F_Name" {% if sort_by == 'F_Name' %}selected{% endif %}>First Name</option>
+                                    <option value="L_Name" {% if sort_by == 'L_Name' %}selected{% endif %}>Last Name</option>
+                                    <option value="Mobile_No" {% if sort_by == 'Mobile_No' %}selected{% endif %}>Mobile No</option>
+                                    <option value="E_Mail" {% if sort_by == 'E_Mail' %}selected{% endif %}>Email</option>
+                                    <option value="Address" {% if sort_by == 'Address' %}selected{% endif %}>Address</option>
+                                </select>
+                                <div class="absolute right-2 top-2.5 text-gray-400 pointer-events-none">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </form>  
+
                     <!-- Add New Customer Button -->
                     <button id="addCustomerBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center">
                         <i class="fas fa-plus mr-2"></i>
@@ -131,6 +157,18 @@
 
             <!-- Customers Content -->
             <div class="p-4 md:p-6">
+                <!-- Search Results Indicator -->
+                {% if search_query %}
+                <div class="mb-4 bg-blue-50 p-3 rounded-md">
+                    <p class="text-blue-800">
+                        Showing results for "<span class="font-semibold">{{ search_query }}</span>" 
+                        <a href="{{ url_for('customers') }}" class="text-blue-600 hover:underline ml-2">
+                            <i class="fas fa-times-circle"></i> Clear search
+                        </a>
+                    </p>
+                </div>
+                {% endif %}           
+
                 <!-- Customers Table -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     <table class="min-w-full divide-y divide-gray-200">
@@ -174,6 +212,17 @@
                                 </td>
                             </tr>
                             {% endfor %}
+                            {% if customers|length == 0 %}
+                            <tr>
+                                <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+                                    {% if search_query %}
+                                    No customers found matching "{{ search_query }}". <a href="{{ url_for('customers') }}" class="text-blue-500 hover:underline">Clear search</a>
+                                    {% else %}
+                                    No customers found.
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
