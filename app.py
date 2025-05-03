@@ -196,7 +196,25 @@ def dashboard():
 
 @app.route('/banks')
 def banks():
-    return render_template('banks.html', banks=init_banks_db())
+    banks_data = init_banks_db()
+    
+    # Get search query and sort parameter from request
+    search_query = request.args.get('search', '')
+    sort_by = request.args.get('sort', '')
+    
+    # Filter banks based on search query across all columns
+    filtered_banks = banks_data
+    if search_query:
+        filtered_banks = [bank for bank in banks_data if any(
+            str(value).lower().find(search_query.lower()) != -1 
+            for key, value in bank.items()
+        )]
+    
+    # Sort banks based on sort parameter
+    if sort_by in ['Bank_Code', 'Bank_Name', 'Address', 'City']:
+        filtered_banks = sorted(filtered_banks, key=lambda x: str(x[sort_by]))
+    
+    return render_template('banks.html', banks=filtered_banks, search_query=search_query, sort_by=sort_by)
 
 # route for adding a bank
 @app.route('/add_bank', methods=['POST'])
@@ -256,7 +274,26 @@ def delete_bank():
 
 @app.route('/branches')
 def branches():
-    return render_template('branches.html', branches=init_branches_db())
+    # Get the branches data
+    branches_data = init_branches_db()
+    
+    # Get search query and sort parameter from request
+    search_query = request.args.get('search', '')
+    sort_by = request.args.get('sort', '')
+    
+    # Filter branches based on search query across all columns
+    filtered_branches = branches_data
+    if search_query:
+        filtered_branches = [branch for branch in branches_data if any(
+            str(value).lower().find(search_query.lower()) != -1 
+            for key, value in branch.items()
+        )]
+    
+    # Sort branches based on sort parameter
+    if sort_by in ['Branch_Code', 'Branch_Name', 'Address', 'Bank_Code']:
+        filtered_branches = sorted(filtered_branches, key=lambda x: str(x[sort_by]))
+    
+    return render_template('branches.html', branches=filtered_branches, search_query=search_query, sort_by=sort_by)
 
 # Route for adding a branch
 @app.route('/add_branch', methods=['POST'])
@@ -316,7 +353,26 @@ def delete_branch():
 
 @app.route('/employees')
 def employees():
-    return render_template('employees.html', employees=init_employee_db())
+    # Get the employees data
+    employees_data = init_employee_db()
+    
+    # Get search query and sort parameter from request
+    search_query = request.args.get('search', '')
+    sort_by = request.args.get('sort', '')
+    
+    # Filter employees based on search query across all columns
+    filtered_employees = employees_data
+    if search_query:
+        filtered_employees = [employee for employee in employees_data if any(
+            str(value).lower().find(search_query.lower()) != -1 
+            for key, value in employee.items()
+        )]
+    
+    # Sort employees based on sort parameter
+    if sort_by in ['Emp_ID', 'Emp_Name', 'Mobile_No', 'Address', 'Bank_Code']:
+        filtered_employees = sorted(filtered_employees, key=lambda x: str(x[sort_by]))
+    
+    return render_template('employees.html', employees=filtered_employees, search_query=search_query, sort_by=sort_by)
 
 # Route for adding an employee
 @app.route('/add_employee', methods=['POST'])
@@ -379,7 +435,26 @@ def delete_employee():
 
 @app.route('/customers')
 def customers():
-    return render_template('customers.html',customers=init_customers_db())
+    # Get the customers data
+    customers_data = init_customers_db()  # Replace with your actual data source
+    
+    # Get search query and sort parameter from request
+    search_query = request.args.get('search', '')
+    sort_by = request.args.get('sort', '')
+    
+    # Filter customers based on search query across all columns
+    filtered_customers = customers_data
+    if search_query:
+        filtered_customers = [customer for customer in customers_data if any(
+            str(value).lower().find(search_query.lower()) != -1 
+            for key, value in customer.items()
+        )]
+    
+    # Sort customers based on sort parameter
+    if sort_by in ['Cust_ID', 'F_Name', 'L_Name', 'Mobile_No', 'E_Mail', 'Address']:
+        filtered_customers = sorted(filtered_customers, key=lambda x: str(x[sort_by]))
+    
+    return render_template('customers.html', customers=filtered_customers, search_query=search_query, sort_by=sort_by)
 
 # Route for adding a customer
 @app.route('/add_customer', methods=['POST'])
@@ -457,7 +532,26 @@ def loans():
     # Calculate summary metrics
     total_amount = sum(loan['Amount'] for loan in loans_data)
     avg_amount = round(total_amount / len(loans_data), 2) if loans_data else 0
-    return render_template('loans.html', loans=loans_data, total_amount=total_amount, avg_amount=avg_amount)
+    # Get the loans data
+    loans_data = init_loans_db()  # Replace with your actual data source
+    
+    # Get search query and sort parameter from request
+    search_query = request.args.get('search', '')
+    sort_by = request.args.get('sort', '')
+    
+    # Filter loans based on search query across all columns
+    filtered_loans = loans_data
+    if search_query:
+        filtered_loans = [loan for loan in loans_data if any(
+            str(value).lower().find(search_query.lower()) != -1 
+            for key, value in loan.items()
+        )]
+    
+    # Sort loans based on sort parameter
+    if sort_by in ['Loan_No', 'Amount', 'Cust_ID', 'Customer_Name']:
+        filtered_loans = sorted(filtered_loans, key=lambda x: str(x[sort_by]))
+    
+    return render_template('loans.html', loans=filtered_loans, search_query=search_query, sort_by=sort_by, total_amount=total_amount, avg_amount=avg_amount)
 
 @app.route('/accounts')
 def accounts():
