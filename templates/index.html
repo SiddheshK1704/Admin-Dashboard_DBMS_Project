@@ -22,7 +22,66 @@
             overflow: hidden;
         }
         .mobile-menu.open {
-            max-height: 200px;
+            max-height: 300px;
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow: auto;
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: modalFade 0.3s;
+        }
+        @keyframes modalFade {
+            from {opacity: 0; transform: translateY(-30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .tab {
+            padding: 16px;
+            width: 50%;
+            text-align: center;
+            font-weight: 600;
+            color: #718096;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .tab.active {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+        }
+        .tab-content {
+            display: none;
+            padding: 24px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            color: #718096;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -35,9 +94,12 @@
                     <i class="fas fa-university text-blue-600 text-2xl mr-2"></i>
                     <span class="text-gray-800 font-bold text-xl">BankAdmin</span>
                 </div>
-                <div class="hidden md:flex space-x-6">
+                <div class="hidden md:flex space-x-6 items-center">
                     <a href="#features" class="text-gray-600 hover:text-blue-600 font-medium">Features</a>
                     <a href="#benefits" class="text-gray-600 hover:text-blue-600 font-medium">Benefits</a>
+                    <button id="loginBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md transition duration-300">
+                        Admin Login
+                    </button>
                 </div>
                 <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
                     <i class="fas fa-bars text-xl"></i>
@@ -49,13 +111,87 @@
                 <div class="flex flex-col space-y-2 py-3">
                     <a href="#features" class="text-gray-600 hover:text-blue-600 font-medium py-2">Features</a>
                     <a href="#benefits" class="text-gray-600 hover:text-blue-600 font-medium py-2">Benefits</a>
-                    <a href="{{ url_for('dashboard') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md text-center transition duration-300 mt-2">
-                        Try Now
-                    </a>
+                    <button id="mobileLoginBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md text-center transition duration-300 mt-2">
+                        Admin Login
+                    </button>
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content relative">
+            <span class="close">&times;</span>
+            
+            <div class="tabs">
+                <div class="tab active" id="loginTab">Admin Login</div>
+                <div class="tab" id="signupTab">Admin Signup</div>
+            </div>
+            
+            <!-- Login Form -->
+            <div class="tab-content active" id="loginContent">
+                <form id="loginForm" action="{{ url_for('admin_login') }}" method="POST">
+                    <div class="mb-4">
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Admin Username</label>
+                        <input type="text" id="username" name="username" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-6">
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="password" name="password" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    {% if error %}
+                    <div class="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300">
+                        Login
+                    </button>
+                </form>
+                <div class="mt-4 text-center text-sm text-gray-600">
+                    <p>Don't have an admin account? <a href="#" id="showSignupBtn" class="text-blue-600 hover:underline">Sign up</a></p>
+                </div>
+            </div>
+            
+            <!-- Signup Form -->
+            <div class="tab-content" id="signupContent">
+                <form id="signupForm" action="{{ url_for('admin_signup') }}" method="POST">
+                    <div class="mb-4">
+                        <label for="signup_username" class="block text-sm font-medium text-gray-700 mb-1">Username <span class="text-xs text-gray-500">(will be displayed)</span></label>
+                        <input type="text" id="signup_username" name="username" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-6">
+                        <label for="signup_password" class="block text-sm font-medium text-gray-700 mb-1">Create Password</label>
+                        <input type="password" id="signup_password" name="password" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    {% if signup_error %}
+                    <div class="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
+                        {{ signup_error }}
+                    </div>
+                    {% endif %}
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300">
+                        Create Admin Account
+                    </button>
+                </form>
+                <div class="mt-4 text-center text-sm text-gray-600">
+                    <p>Already have an account? <a href="#" id="showLoginBtn" class="text-blue-600 hover:underline">Log in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero-gradient text-white py-20">
@@ -65,9 +201,9 @@
                     <h1 class="text-4xl md:text-5xl font-bold mb-4">Modern Banking Management System</h1>
                     <p class="text-lg md:text-xl mb-8 opacity-90">Streamline your banking operations with our comprehensive management solution. Manage banks, branches, employees, customers, and transactions all in one place.</p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="{{ url_for('dashboard') }}" class="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 py-3 rounded-md text-center transition duration-300">
+                        <button id="heroLoginBtn" class="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 py-3 rounded-md text-center transition duration-300">
                             Try Now
-                        </a>
+                        </button>
                         <a href="#features" class="border border-white text-white hover:bg-white hover:text-blue-600 font-medium px-8 py-3 rounded-md text-center transition duration-300 learn-more">
                             Learn More
                         </a>
@@ -188,9 +324,9 @@
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Banking Operations?</h2>
             <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">Get started with our comprehensive banking management system today.</p>
-            <a href="{{ url_for('dashboard') }}" class="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 py-3 rounded-md inline-block transition duration-300">
+            <button id="ctaLoginBtn" class="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 py-3 rounded-md inline-block transition duration-300">
                 Try Now
-            </a>
+            </button>
         </div>
     </section>
 
@@ -220,6 +356,68 @@
     </footer>
 
     <script>
+        // Modal functionality
+        const modal = document.getElementById('loginModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+        const heroLoginBtn = document.getElementById('heroLoginBtn');
+        const ctaLoginBtn = document.getElementById('ctaLoginBtn');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        
+        // Tab functionality
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const loginContent = document.getElementById('loginContent');
+        const signupContent = document.getElementById('signupContent');
+        const showSignupBtn = document.getElementById('showSignupBtn');
+        const showLoginBtn = document.getElementById('showLoginBtn');
+        
+        // Open modal from different buttons
+        function openModal() {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling while modal is open
+        }
+        
+        if (loginBtn) loginBtn.onclick = openModal;
+        if (mobileLoginBtn) mobileLoginBtn.onclick = openModal;
+        if (heroLoginBtn) heroLoginBtn.onclick = openModal;
+        if (ctaLoginBtn) ctaLoginBtn.onclick = openModal;
+        
+        // Close modal
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        if (closeBtn) closeBtn.onclick = closeModal;
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+        
+        // Tab switching
+        function showLoginTab() {
+            loginTab.classList.add('active');
+            signupTab.classList.remove('active');
+            loginContent.classList.add('active');
+            signupContent.classList.remove('active');
+        }
+        
+        function showSignupTab() {
+            loginTab.classList.remove('active');
+            signupTab.classList.add('active');
+            loginContent.classList.remove('active');
+            signupContent.classList.add('active');
+        }
+        
+        if (loginTab) loginTab.onclick = showLoginTab;
+        if (signupTab) signupTab.onclick = showSignupTab;
+        if (showSignupBtn) showSignupBtn.onclick = showSignupTab;
+        if (showLoginBtn) showLoginBtn.onclick = showLoginTab;
+        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
