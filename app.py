@@ -555,7 +555,30 @@ def loans():
 
 @app.route('/accounts')
 def accounts():
-    return render_template('accounts.html', accounts=init_accounts_db())
+    # Get the accounts data
+    accounts_data = init_accounts_db()  # Replace with your actual data source
+    
+    # Get search query and sort parameter from request
+    search_query = request.args.get('search', '')
+    sort_by = request.args.get('sort', '')
+    
+    # Filter accounts based on search query across all columns
+    filtered_accounts = accounts_data
+    if search_query:
+        filtered_accounts = [account for account in accounts_data if any(
+            str(value).lower().find(search_query.lower()) != -1
+            for key, value in account.items()
+        )]
+    
+    # Sort accounts based on sort parameter
+    if sort_by in ['Account_No', 'balance', 'Cust_ID']:
+        # For balance column, convert to float for proper numeric sorting
+        if sort_by == 'balance':
+            filtered_accounts = sorted(filtered_accounts, key=lambda x: float(str(x[sort_by]).replace('₹', '').replace(',', '')))
+        else:
+            filtered_accounts = sorted(filtered_accounts, key=lambda x: str(x[sort_by]))
+    
+    return render_template('accounts.html', accounts=filtered_accounts, search_query=search_query, sort_by=sort_by)
 
 @app.route('/account_types')
 def account_types():
