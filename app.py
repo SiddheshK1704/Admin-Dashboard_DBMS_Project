@@ -3,6 +3,16 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 app = Flask(__name__)
 app.secret_key = 'bank_management_secret_key'  # Required for flashing messages
 
+# Login required decorator for protecting routes
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'admin_id' not in session:
+            flash('Please log in to access this page', 'error')
+            return redirect(url_for('index', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
+
 # to calculate information being showed on the main dashboard page
 def calculate_dashboard_stats():
     # Get data from all tables
@@ -185,9 +195,90 @@ def init_loan_payments_db():
 
 
 @app.route('/')
-@app.route('/index')
 def index():
     return render_template('index.html')
+
+@app.route('/admin_login', methods=['POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        # Your database connection and query here
+        # Example:
+        # connection = db_connection()
+        # cursor = connection.cursor()
+        # cursor.execute("SELECT admin_id, username, password FROM admins WHERE username = %s", (username,))
+        # admin = cursor.fetchone()
+        
+        # For demonstration purposes (replace with actual DB check)
+        # In reality, you would never store plaintext passwords
+        # You should use password hashing (e.g., bcrypt)
+        admin = None
+        if username == "admin" and password == "password":  # Replace with actual DB check
+            admin = {"admin_id": 1, "username": "admin"}
+        
+        if admin:
+            # Store admin info in session
+            session['admin_id'] = admin['admin_id']
+            session['username'] = admin['username']
+            return redirect(url_for('dashboard'))
+        else:
+            # Return to index with error
+            return render_template('index.html', error="Invalid username or password")
+    
+    return redirect(url_for('index'))
+
+@app.route('/admin_signup', methods=['POST'])
+def admin_signup():
+    if request.method == 'POST':
+        # Extract form data
+        username = request.form['username']
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+        password = request.form['password']
+        
+        # Check if username already exists
+        # connection = db_connection()
+        # cursor = connection.cursor()
+        # cursor.execute("SELECT username FROM admins WHERE username = %s", (username,))
+        # existing_admin = cursor.fetchone()
+        
+        # For demonstration (replace with actual DB check)
+        existing_admin = None  # Check if username exists in your DB
+        
+        if existing_admin:
+            return render_template('index.html', signup_error="Username already exists")
+        
+        # Insert new admin into database
+        # In production, hash the password before storing
+        # hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        # cursor.execute(
+        #     "INSERT INTO admins (username, name, email, phone, password) VALUES (%s, %s, %s, %s, %s)",
+        #     (username, name, email, phone, hashed_password)
+        # )
+        # connection.commit()
+        # admin_id = cursor.lastrowid
+        
+        # For demonstration
+        admin_id = 2  # This would be the new admin's ID from your DB
+        
+        # Log the user in after signup
+        session['admin_id'] = admin_id
+        session['username'] = username
+        
+        return redirect(url_for('dashboard'))
+    
+    return redirect(url_for('index'))
+
+@app.route('/logout')
+def logout():
+    # Clear session
+    session.pop('admin_id', None)
+    session.pop('username', None)
+    flash('You have been logged out', 'info')
+    return redirect(url_for('index'))
 
 @app.route('/dashboard')
 def dashboard():
