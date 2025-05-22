@@ -68,15 +68,3 @@ DBMS-Project/
 
 ---
 
-## 👨‍💻 Author
-
-**Siddhesh**  
-🎓 B.Tech CSE (AI&ML), SRM University  
-💡 Passionate about AI, ML, and Full-Stack Development  
-📬 Reach out on [LinkedIn](https://www.linkedin.com) or [Twitter](https://twitter.com)
-
----
-
-## 📃 License
-
-This project is licensed under the [MIT License](LICENSE).
